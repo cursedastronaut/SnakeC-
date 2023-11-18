@@ -88,11 +88,8 @@ int main(int, char**)
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-	Playground2 *pg2 = new Playground2();
 	Snake *snake = new Snake();
-	snake->pg2 = pg2;
-	pg2->io = &io;
-	pg2->updateCap = 0.5f;
+	snake->io = &io;
 
 
 	// Main loop
@@ -117,14 +114,9 @@ int main(int, char**)
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		pg2->dl = ImGui::GetBackgroundDrawList();
-		snake->getDirection();
-		if (pg2->updateTimer >= pg2->updateCap ) {
-			snake->Update();
-			pg2->updateTimer = 0.f;
-		}
+		snake->dl = ImGui::GetBackgroundDrawList();
+		snake->Update();
 		snake->Draw();
-		pg2->updateTimer += io.DeltaTime;
 
 		// Rendering
 		ImGui::Render();

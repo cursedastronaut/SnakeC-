@@ -1,6 +1,22 @@
 #include "snake.h"
+using namespace std;
+
+Snake::Snake() {
+	updateCap = 0.5f;
+	updateTimer = 0.f;
+}
 
 void Snake::Update() {
+	getDirection();
+	if (updateTimer >= updateCap) {
+		cout << updateCap << endl;
+		Movement();
+		updateTimer = 0.f;
+	}
+	updateTimer += io->DeltaTime;
+}
+
+void Snake::Movement() {
 	switch(direction) {
 		case DIR_UP:
 			pos.y -= CASE_SIZE.y;
@@ -20,7 +36,7 @@ void Snake::Update() {
 }
 
 void Snake::Draw() {
-	pg2->dl->AddRectFilled(pos, pos+CASE_SIZE, IM_COL32_WHITE);
+	dl->AddRectFilled(pos, pos+CASE_SIZE, IM_COL32_WHITE);
 }
 
 void Snake::getDirection() {
