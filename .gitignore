@@ -1,0 +1,13 @@
+objects/
+externals/imgui/.github
+externals/imgui/docs
+externals/imgui/examples
+externals/imgui/misc
+externals/imgui/.gitignore
+externals/imgui/.gitattributes
+externals/imgui/.editorconfig
+externals/imgui/backends/**
+!externals/imgui/backends/imgui_impl_glfw.cpp
+!externals/imgui/backends/imgui_impl_opengl3.cpp
+imgui.ini
+snake
