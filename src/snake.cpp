@@ -1,5 +1,6 @@
 #include "snake.h"
 using namespace std;
+int toInt(const char* index);
 
 //Snake class constructor
 Snake::Snake() {
@@ -138,4 +139,57 @@ void Snake::borderLoop() {
 		tail[0].x = GRID_SIZE.x - 1;
 	else if (tail[0].y < 0)
 		tail[0].y = GRID_SIZE.y - 1;
+}
+
+//Handles user's command line arguments, returns true if the program should exit.
+bool Snake::setUserArgs(const int argc, char* argv[]) {
+	for (int i = 0; i < argc; ++i)
+	{
+		if (strcmp(argv[i], "--loop") == 0) {
+			loopAtBorders = true;
+		} else if (strcmp(argv[i], "--skip") == 0) {
+			scene = 1;
+		} else if (strcmp(argv[i], "--gridx") == 0) {
+			if (i >= argc - 1) {
+				cout	<< "Error: --gridx argument is empty." << endl
+						<< "Syntax is --gridx [grid horizontal size]" << endl;
+				return true;
+			} else {
+				GRID_SIZE.x = (float)toInt(argv[i+1]);
+				if (GRID_SIZE.x == 0) {
+					cout << "Erreur: Invalid value at --gridx" << endl;
+					return true;
+				}
+			}
+		} else if (strcmp(argv[i], "--gridy") == 0) {
+			if (i >= argc - 1) {
+				cout	<< "Error: --gridy argument is empty." << endl
+						<< "Syntax is --gridy [grid horizontal size]" << endl;
+				return true;
+			} else {
+				GRID_SIZE.y = (float)toInt(argv[i+1]);
+				if (GRID_SIZE.y == 0) {
+					cout << "Erreur: Invalid value at --gridy" << endl;
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+int toInt(const char* index) {
+	std::string temp = index;
+	if (temp.size() == 0)
+		return 0;
+	int result = 0;	
+
+	for (size_t i = temp.size()-1; i < temp.size(); --i)
+	{
+		if (temp[i] < '0' || temp[i] > '9') {
+			return 0;
+		}
+		result += (temp[i] - '0') * std::pow(10, temp.size()-1-i);
+	}
+	return result;
 }

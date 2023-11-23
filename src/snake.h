@@ -1,5 +1,6 @@
 #pragma once
-#pragma once
+#ifndef __SNAKE_CLASS__
+#define __SNAKE_CLASS__
 #include "../externals/imgui/imgui.h"
 #include "../externals/imgui/backends/imgui_impl_glfw.h"
 #include "../externals/imgui/backends/imgui_impl_opengl3.h"
@@ -16,16 +17,27 @@
 #include "constants.hpp"
 using namespace std;
 
+
+
 class Snake {
 	public:
+		//Class Constructor
 				Snake();
+		//Main update function
 		void	Update();
+		//Draws the snake, and the apple
 		void	Draw();
+		//Resets values of snake object to launch game again.
 		void	Reset();
+		//Handles user's command line arguments
+		bool	setUserArgs(const int argc, char* argv[]);
 
 		ImDrawList		*dl;
 		ImGuiIO			*io;
 		uint8_t			scene	= 0;
+
+		bool			loopAtBorders = false;
+		uint8_t2		GRID_SIZE		=	{40, 30};
 
 	private:
 		uint8_t			direction	= DIR_DOWN;
@@ -36,12 +48,15 @@ class Snake {
 		vector<ImVec2>	tail = {{5.f, 7.f}};
 		float			updateCap	= UPDATE_CAP;
 		float			updateTimer	= 0.f;
-		bool			loopAtBorders = true;
 
+		//Handles snake head and tail movement
 		ImVec2	Movement(size_t);
+		//Make the snake head loop around the border
 		void	borderLoop();
+		//Gets the user input to change to a direction
 		void	getDirection();
 		
-		//Debug
+		//Displays debug informations
 		void	DebugInfo();
 };
+#endif

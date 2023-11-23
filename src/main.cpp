@@ -18,8 +18,11 @@ static void glfw_error_callback(int error, const char* description)
 }
 
 // Main code
-int main(int, char**)
+int main(int argc, char* argv[])
 {
+	Snake *snake = new Snake();
+	if (snake->setUserArgs(argc, argv))
+		return 1;
 	glfwSetErrorCallback(glfw_error_callback);
 	if (!glfwInit())
 		return 1;
@@ -48,7 +51,7 @@ int main(int, char**)
 #endif
 
 	// Create window with graphics context
-	GLFWwindow* window = glfwCreateWindow(640, 480, "Snake", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(snake->GRID_SIZE.x * CASE_SIZE.x, snake->GRID_SIZE.y * CASE_SIZE.y, "Snake", nullptr, nullptr);
 	if (window == nullptr)
 		return 1;
 	glfwMakeContextCurrent(window);
@@ -88,10 +91,9 @@ int main(int, char**)
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-	Snake *snake = new Snake();
+
+
 	snake->io = &io;
-
-
 	// Main loop
 #ifdef __EMSCRIPTEN__
 	// For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
