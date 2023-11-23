@@ -117,16 +117,16 @@ int main(int, char**)
 		snake->dl = ImGui::GetBackgroundDrawList();
 		switch (snake->scene)
 		{
-		case 0:
+		case SCENE_MAINMENU:
 			snake->dl->AddText({0,0}, IM_COL32_BLACK, "Main Menu");
 			if (ImGui::IsKeyPressed(ImGuiKey_Enter)) 
-				snake->scene = 1;
+				snake->scene = SCENE_GAME;
 			break;
-		case 1:
+		case SCENE_GAME:
 			snake->Update();
 			snake->Draw();
 			break;
-		case 2:
+		case SCENE_GAMEOVER:
 			snake->dl->AddText({0,0}, IM_COL32_BLACK, "Game Over");
 			if (ImGui::IsKeyPressed(ImGuiKey_Enter)) {
 				snake->Reset();

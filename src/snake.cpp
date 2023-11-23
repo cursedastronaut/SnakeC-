@@ -28,9 +28,12 @@ void Snake::Update() {
 		}
 		Movement(0);
 
+		if (!loopAtBorders && (tail[0].x < 0 || tail[0].x >= GRID_SIZE.x || tail[0].y < 0 || tail[0].y >= GRID_SIZE.y))
+			scene = SCENE_GAMEOVER;
+
 		for (size_t i = 1; i < tail.size(); ++i)
 			if (tail[0] == tail[i])
-				scene = 2;
+				scene = SCENE_GAMEOVER;
 
 		if (tailTemp.x != -1 && tailTemp.y != -1) {
 			tail.push_back(tailTemp);
