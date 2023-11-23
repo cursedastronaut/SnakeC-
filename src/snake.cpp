@@ -173,6 +173,13 @@ bool Snake::setUserArgs(const int argc, char* argv[]) {
 					return true;
 				}
 			}
+		} else if (strcmp(argv[i], "--help") == 0) {
+			cout	<< "Snake by @cursedastronaut on Github" << endl
+					<< "\t- `--loop`\n\t\tAllows player to loop around borders instead of having a game over." << endl
+					<< "\t- `--x [width]`\n\t\tAllows player to choose their horizontal grid size. Default is 40." << endl
+					<< "\t- `--y [height]`\n\t\tAllows player to choose their vertical grid size. Default is 30." << endl
+					<< "\t- `--skip`\n\t\tAllows player to skip the main menu." << endl;
+					return true;
 		}
 	}
 	return false;
