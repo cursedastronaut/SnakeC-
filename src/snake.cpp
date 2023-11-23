@@ -19,6 +19,8 @@ void Snake::Update() {
 	getDirection();
 	if (updateTimer >= updateCap) {
 		updateTimer = 0.f;
+
+		previousDirection = direction;
 		
 		//Go through each tail section, and move them
 		for (size_t i = tail.size()-1; i > 0 && i < tail.size(); --i) {
@@ -76,20 +78,19 @@ ImVec2 Snake::Movement(size_t i) {
 }
 
 void Snake::Draw() {
-	for (size_t i = 0; i < tail.size();		cout << i << " " << tail[i].x << ":" << tail[i-1].x << endl;
- ++i)
+	for (size_t i = 0; i < tail.size(); ++i)
 		dl->AddRectFilled(tail[i]*CASE_SIZE, tail[i]*CASE_SIZE+CASE_SIZE, IM_COL32_WHITE);
 	dl->AddRectFilled(applePos*CASE_SIZE, applePos*CASE_SIZE+CASE_SIZE, IM_COL32_BLACK);
 }
 
 void Snake::getDirection() {
-	if (ImGui::IsKeyPressed(ImGuiKey_UpArrow))
+	if (ImGui::IsKeyPressed(ImGuiKey_UpArrow)		&& (tail.size() < 2 || previousDirection != DIR_DOWN))
 		direction = DIR_UP;
-	if (ImGui::IsKeyPressed(ImGuiKey_LeftArrow))
+	if (ImGui::IsKeyPressed(ImGuiKey_LeftArrow)		&& (tail.size() < 2 || previousDirection != DIR_RIGHT))
 		direction = DIR_LEFT;
-	if (ImGui::IsKeyPressed(ImGuiKey_DownArrow))
+	if (ImGui::IsKeyPressed(ImGuiKey_DownArrow)		&& (tail.size() < 2 || previousDirection != DIR_UP))
 		direction = DIR_DOWN;
-	if (ImGui::IsKeyPressed(ImGuiKey_RightArrow))
+	if (ImGui::IsKeyPressed(ImGuiKey_RightArrow)	&& (tail.size() < 2 || previousDirection != DIR_LEFT))
 		direction = DIR_RIGHT;
 }
 

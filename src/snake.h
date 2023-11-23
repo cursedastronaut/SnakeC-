@@ -29,6 +29,7 @@ class Snake {
 
 	private:
 		uint8_t			direction	= DIR_DOWN;
+		uint8_t			previousDirection	= DIR_DOWN;
 		ImVec2			applePos;
 		uint16_t		appleEaten	= 0.f;
 		ImVec2			tailTemp;
