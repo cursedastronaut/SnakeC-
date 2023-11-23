@@ -14,6 +14,7 @@
 #include "../../GLFW/glfw3.h" // Will drag system OpenGL headers
 #include <vector>
 #include "constants.hpp"
+using namespace std;
 
 class Snake {
 	public:
@@ -25,14 +26,15 @@ class Snake {
 		ImGuiIO *io;
 
 	private:
-		ImVec2		pos			= {0.f, 0.f};
-		uint8_t		direction	= DIR_DOWN;
-		ImVec2		applePos;
-		uint16_t	appleEaten	= 0.f;
-		float		updateCap	= UPDATE_CAP;
-		float		updateTimer	= 0.f;
+		uint8_t			direction	= DIR_DOWN;
+		ImVec2			applePos;
+		uint16_t		appleEaten	= 0.f;
+		ImVec2			tailTemp;
+		vector<ImVec2>	tail = {{5.f, 7.f}};
+		float			updateCap	= UPDATE_CAP;
+		float			updateTimer	= 0.f;
 
-		void	Movement();
+		ImVec2	Movement(size_t);
 		void	getDirection();
 		
 		//Debug

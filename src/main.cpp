@@ -132,6 +132,7 @@ int main(int, char**)
 #ifdef __EMSCRIPTEN__
 	EMSCRIPTEN_MAINLOOP_END;
 #endif
+try {
 
 	// Cleanup
 	ImGui_ImplOpenGL3_Shutdown();
@@ -140,6 +141,7 @@ int main(int, char**)
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
+} catch(void*) {}
 
 	return 0;
 }
