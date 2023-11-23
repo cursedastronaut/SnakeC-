@@ -57,7 +57,8 @@ void Snake::Update() {
 		}
 	}
 	updateTimer += io->DeltaTime;
-	DebugInfo();
+	if (debugMode)
+		DebugInfo();
 }
 
 //Handles snake head and tail movement
@@ -149,6 +150,8 @@ bool Snake::setUserArgs(const int argc, char* argv[]) {
 			loopAtBorders = true;
 		} else if (strcmp(argv[i], "--skip") == 0) {
 			scene = 1;
+		} else if (strcmp(argv[i], "--debug") == 0) {
+			debugMode = true;
 		} else if (strcmp(argv[i], "--gridx") == 0) {
 			if (i >= argc - 1) {
 				cout	<< "Error: --gridx argument is empty." << endl

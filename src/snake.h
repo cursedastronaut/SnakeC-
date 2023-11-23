@@ -37,6 +37,7 @@ class Snake {
 		uint8_t			scene	= 0;
 
 		bool			loopAtBorders = false;
+		bool			debugMode = false;
 		uint8_t2		GRID_SIZE		=	{40, 30};
 
 	private:
