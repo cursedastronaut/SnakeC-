@@ -7,6 +7,7 @@ Snake::Snake() {
 
 	tail = {{5.f, 7.f}};
 	tailTemp = {-1, -1};
+	scene = 0;
 	srand(time(NULL)); // Seed the time
 	applePos = {
 		static_cast<float>(rand() % (int)(GRID_SIZE.x)) ,
@@ -24,6 +25,11 @@ void Snake::Update() {
 			Movement(i);
 		}
 		Movement(0);
+
+		for (size_t i = 1; i < tail.size(); ++i)
+			if (tail[0] == tail[i])
+				scene = 2;
+
 		if (tailTemp.x != -1 && tailTemp.y != -1) {
 			tail.push_back(tailTemp);
 			tailTemp = {-1, -1};

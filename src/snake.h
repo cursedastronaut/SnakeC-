@@ -22,8 +22,9 @@ class Snake {
 		void	Update();
 		void	Draw();
 
-		ImDrawList *dl;
-		ImGuiIO *io;
+		ImDrawList		*dl;
+		ImGuiIO			*io;
+		uint8_t			scene	= 0;
 
 	private:
 		uint8_t			direction	= DIR_DOWN;

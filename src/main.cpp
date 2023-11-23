@@ -115,8 +115,22 @@ int main(int, char**)
 		ImGui::NewFrame();
 
 		snake->dl = ImGui::GetBackgroundDrawList();
-		snake->Update();
-		snake->Draw();
+		switch (snake->scene)
+		{
+		case 0:
+			snake->dl->AddText({0,0}, IM_COL32_BLACK, "Main Menu");
+			if (ImGui::IsKeyPressed(ImGuiKey_Enter)) 
+				snake->scene = 1;
+			break;
+		case 1:
+			snake->Update();
+			snake->Draw();
+			break;
+		case 2:
+			snake->dl->AddText({0,0}, IM_COL32_BLACK, "Game Over");
+		default:
+			break;
+		}
 
 		// Rendering
 		ImGui::Render();
