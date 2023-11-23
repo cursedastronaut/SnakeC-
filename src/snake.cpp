@@ -69,7 +69,6 @@ ImVec2 Snake::Movement(size_t i) {
 		}
 	}
 	else {
-		cout << i << " " << tail[i].x << ":" << tail[i-1].x << endl;
 		tail[i] = tail[i-1];
 	}
 
@@ -77,7 +76,8 @@ ImVec2 Snake::Movement(size_t i) {
 }
 
 void Snake::Draw() {
-	for (size_t i = 0; i < tail.size(); ++i)
+	for (size_t i = 0; i < tail.size();		cout << i << " " << tail[i].x << ":" << tail[i-1].x << endl;
+ ++i)
 		dl->AddRectFilled(tail[i]*CASE_SIZE, tail[i]*CASE_SIZE+CASE_SIZE, IM_COL32_WHITE);
 	dl->AddRectFilled(applePos*CASE_SIZE, applePos*CASE_SIZE+CASE_SIZE, IM_COL32_BLACK);
 }
@@ -100,4 +100,15 @@ void Snake::DebugInfo() {
 	for (size_t i = 0; i < tail.size(); ++i)
 		ImGui::Text("Snake%ld : %f, %f", i, tail[i].x, tail[i].y);
 	ImGui::End();
+}
+
+void Snake::Reset() {
+	tail = {{5.f, 7.f}};
+	tailTemp = {-1, -1};
+	scene = 1;
+	srand(time(NULL)); // Seed the time
+	applePos = {
+		static_cast<float>(rand() % (int)(GRID_SIZE.x)) ,
+		static_cast<float>(rand() % (int)(GRID_SIZE.y)) 
+	};
 }

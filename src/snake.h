@@ -21,6 +21,7 @@ class Snake {
 				Snake();
 		void	Update();
 		void	Draw();
+		void	Reset();
 
 		ImDrawList		*dl;
 		ImGuiIO			*io;

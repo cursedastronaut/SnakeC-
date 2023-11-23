@@ -128,6 +128,9 @@ int main(int, char**)
 			break;
 		case 2:
 			snake->dl->AddText({0,0}, IM_COL32_BLACK, "Game Over");
+			if (ImGui::IsKeyPressed(ImGuiKey_Enter)) {
+				snake->Reset();
+			}
 		default:
 			break;
 		}
