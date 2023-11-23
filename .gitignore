@@ -11,6 +11,7 @@ externals/imgui/backends/**
 !externals/imgui/backends/imgui_impl_opengl3.cpp
 !externals/imgui/backends/imgui_impl_glfw.h
 !externals/imgui/backends/imgui_impl_opengl3.h
+!externals/imgui/backends/imgui_impl_opengl3_loader.h
 imgui.ini
 snake
 .vscode/
