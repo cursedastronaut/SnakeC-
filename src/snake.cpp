@@ -1,6 +1,7 @@
 #include "snake.h"
 using namespace std;
 
+//Snake class constructor
 Snake::Snake() {
 	updateCap = UPDATE_CAP;
 	updateTimer = 0.f;
@@ -15,6 +16,7 @@ Snake::Snake() {
 	};
 }
 
+//Main update function
 void Snake::Update() {
 	getDirection();
 	if (updateTimer >= updateCap) {
@@ -28,9 +30,13 @@ void Snake::Update() {
 		}
 		Movement(0);
 
+		//Checks if snake head is beyond limit
 		if (!loopAtBorders && (tail[0].x < 0 || tail[0].x >= GRID_SIZE.x || tail[0].y < 0 || tail[0].y >= GRID_SIZE.y))
 			scene = SCENE_GAMEOVER;
+		else
+			borderLoop();
 
+		//Checks if snake head is colliding with a tail section
 		for (size_t i = 1; i < tail.size(); ++i)
 			if (tail[0] == tail[i])
 				scene = SCENE_GAMEOVER;
@@ -53,6 +59,7 @@ void Snake::Update() {
 	DebugInfo();
 }
 
+//Handles snake head and tail movement
 ImVec2 Snake::Movement(size_t i) {
 	ImVec2 prevPos = tail[i];
 	if (i == 0) {
@@ -80,12 +87,14 @@ ImVec2 Snake::Movement(size_t i) {
 	return prevPos;
 }
 
+//Draws the snake, and the apple
 void Snake::Draw() {
 	for (size_t i = 0; i < tail.size(); ++i)
 		dl->AddRectFilled(tail[i]*CASE_SIZE, tail[i]*CASE_SIZE+CASE_SIZE, IM_COL32_WHITE);
 	dl->AddRectFilled(applePos*CASE_SIZE, applePos*CASE_SIZE+CASE_SIZE, IM_COL32_BLACK);
 }
 
+//Gets the user input to change to a direction
 void Snake::getDirection() {
 	if (ImGui::IsKeyPressed(ImGuiKey_UpArrow)		&& (tail.size() < 2 || previousDirection != DIR_DOWN))
 		direction = DIR_UP;
@@ -97,6 +106,7 @@ void Snake::getDirection() {
 		direction = DIR_RIGHT;
 }
 
+//Displays debug informations
 void Snake::DebugInfo() {
 	ImGui::Begin("Debug Informations");
 	ImGui::Text("PlaygroundSize: %d, %d", GRID_SIZE.x, GRID_SIZE.y);
@@ -106,6 +116,7 @@ void Snake::DebugInfo() {
 	ImGui::End();
 }
 
+//Resets values of snake object to launch game again.
 void Snake::Reset() {
 	tail = {{5.f, 7.f}};
 	tailTemp = {-1, -1};
@@ -115,4 +126,16 @@ void Snake::Reset() {
 		static_cast<float>(rand() % (int)(GRID_SIZE.x)) ,
 		static_cast<float>(rand() % (int)(GRID_SIZE.y)) 
 	};
+}
+
+//Make the snake head loop around the border
+void Snake::borderLoop() {
+	if (tail[0].x >= GRID_SIZE.x)
+		tail[0].x = 0;
+	else if (tail[0].y >= GRID_SIZE.y)
+		tail[0].y = 0;
+	else if (tail[0].x < 0)
+		tail[0].x = GRID_SIZE.x - 1;
+	else if (tail[0].y < 0)
+		tail[0].y = GRID_SIZE.y - 1;
 }

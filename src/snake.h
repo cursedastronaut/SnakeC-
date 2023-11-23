@@ -36,9 +36,10 @@ class Snake {
 		vector<ImVec2>	tail = {{5.f, 7.f}};
 		float			updateCap	= UPDATE_CAP;
 		float			updateTimer	= 0.f;
-		bool			loopAtBorders = false;
+		bool			loopAtBorders = true;
 
 		ImVec2	Movement(size_t);
+		void	borderLoop();
 		void	getDirection();
 		
 		//Debug
