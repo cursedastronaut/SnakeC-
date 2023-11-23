@@ -1,5 +1,5 @@
 EXE = snake
-IMGUI_DIR = externals/imgui
+IMGUI_DIR = externals/include/imgui
 SOURCES = src/main.cpp src/snake.cpp
 SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
 SOURCES += $(IMGUI_DIR)/backends/imgui_impl_glfw.cpp $(IMGUI_DIR)/backends/imgui_impl_opengl3.cpp
@@ -8,7 +8,7 @@ UNAME_S := $(shell uname -s)
 LINUX_GL_LIBS = -lGL
 
 CXXFLAGS = -std=c++11 -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends
-CXXFLAGS += -g -Wall -Wformat -Wno-narrowing
+CXXFLAGS += -g -Wall -Wformat -Wno-narrowing -Lexternals/libs
 LIBS =
 
 ##---------------------------------------------------------------------
@@ -45,8 +45,7 @@ endif
 ifeq ($(OS), Windows_NT)
 	ECHO_MESSAGE = "MinGW"
 	LIBS += -lglfw3 -lgdi32 -lopengl32 -limm32
-
-	CXXFLAGS += `pkg-config --cflags glfw3`
+	CXXFLAGS += -Lexternals/libs/windows-mingw64-13.2.0
 	CFLAGS = $(CXXFLAGS)
 endif
 
@@ -55,13 +54,13 @@ endif
 ##---------------------------------------------------------------------
 
 ./objects/%.o: src/%.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -Iexternals/include -c -o $@ $<
 
 ./objects/%.o: $(IMGUI_DIR)/%.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -Iexternals/include -c -o $@ $<
 
 ./objects/%.o: $(IMGUI_DIR)/backends/%.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -Iexternals/include -c -o $@ $<
 
 all: $(EXE)
 	@echo Build complete for $(ECHO_MESSAGE)

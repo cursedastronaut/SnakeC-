@@ -2,7 +2,7 @@
 #ifndef _SNAKE_CONSTANTS_
 #define _SNAKE_CONSTANTS_
 #include <iostream>
-#include "../externals/imgui/imgui.h"
+#include "../externals/include/imgui/imgui.h"
 struct uint8_t2	{	uint8_t	x;	uint8_t	y;	};
 const	ImVec2		CASE_SIZE		=	{16, 16};
 

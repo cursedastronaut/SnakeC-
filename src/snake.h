@@ -1,9 +1,9 @@
 #pragma once
 #ifndef __SNAKE_CLASS__
 #define __SNAKE_CLASS__
-#include "../externals/imgui/imgui.h"
-#include "../externals/imgui/backends/imgui_impl_glfw.h"
-#include "../externals/imgui/backends/imgui_impl_opengl3.h"
+#include "../externals/include/imgui/imgui.h"
+#include "../externals/include/imgui/backends/imgui_impl_glfw.h"
+#include "../externals/include/imgui/backends/imgui_impl_opengl3.h"
 #include <stdio.h>
 #include <cstdlib>
 #include <ctime>
@@ -12,7 +12,7 @@
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
 #endif
-#include "../externals/GLFW/glfw3.h" // Will drag system OpenGL headers
+#include "../externals/include/GLFW/glfw3.h" // Will drag system OpenGL headers
 #include <vector>
 #include "constants.hpp"
 using namespace std;
