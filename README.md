@@ -23,49 +23,49 @@ make -j
 ```
 
 ## Folder tree
-/
-│   .gitignore
-│   Makefile
-│   README.md
-│
-├───externals
-│   ├───include
-│   │   ├───GLFW
-│   │   │       glfw3.h
-│   │   │       glfw3native.h
-│   │   │
-│   │   └───imgui
-│   │       │   imconfig.h
-│   │       │   imgui.cpp
-│   │       │   imgui.h
-│   │       │   imgui_demo.cpp
-│   │       │   imgui_draw.cpp
-│   │       │   imgui_internal.h
-│   │       │   imgui_tables.cpp
-│   │       │   imgui_widgets.cpp
-│   │       │   imstb_rectpack.h
-│   │       │   imstb_textedit.h
-│   │       │   imstb_truetype.h
-│   │       │   LICENSE.txt
-│   │       │
-│   │       └───backends
-│   │               imgui_impl_glfw.cpp
-│   │               imgui_impl_glfw.h
-│   │               imgui_impl_opengl3.cpp
-│   │               imgui_impl_opengl3.h
-│   │               imgui_impl_opengl3_loader.h
-│   │
-│   └───libs
-│       └───windows-mingw64-13.2.0
-│               libglfw3.a
-│
-├───objects
-│
-└───src
-        constants.hpp
-        main.cpp
-        snake.cpp
-        snake.h
+/__
+│   .gitignore__
+│   Makefile__
+│   README.md__
+│__
+├───externals__
+│   ├───include__
+│   │   ├───GLFW__
+│   │   │       glfw3.h__
+│   │   │       glfw3native.h__
+│   │   │__
+│   │   └───imgui__
+│   │       │   imconfig.h__
+│   │       │   imgui.cpp__
+│   │       │   imgui.h__
+│   │       │   imgui_demo.cpp__
+│   │       │   imgui_draw.cpp__
+│   │       │   imgui_internal.h__
+│   │       │   imgui_tables.cpp__
+│   │       │   imgui_widgets.cpp__
+│   │       │   imstb_rectpack.h__
+│   │       │   imstb_textedit.h__
+│   │       │   imstb_truetype.h__
+│   │       │   LICENSE.txt__
+│   │       │__
+│   │       └───backends__
+│   │               imgui_impl_glfw.cpp__
+│   │               imgui_impl_glfw.h__
+│   │               imgui_impl_opengl3.cpp__
+│   │               imgui_impl_opengl3.h__
+│   │               imgui_impl_opengl3_loader.h__
+│   │__
+│   └───libs__
+│       └───windows-mingw64-13.2.0__
+│               libglfw3.a__
+│__
+├───objects__
+│__
+└───src__
+        constants.hpp__
+        main.cpp__
+        snake.cpp__
+        snake.h__
 
 ## Credits
 - [ImGui](https://github.com/ocornut/imgui)
