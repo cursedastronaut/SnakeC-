@@ -17,3 +17,4 @@ snake
 *.exe
 .vscode/
 *.json
+save.bin
