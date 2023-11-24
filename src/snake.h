@@ -6,6 +6,7 @@
 #include "../externals/include/imgui/backends/imgui_impl_opengl3.h"
 #include <stdio.h>
 #include <cstdlib>
+#include <fstream>
 #include <ctime>
 #include <cmath>
 #define GL_SILENCE_DEPRECATION
@@ -15,6 +16,7 @@
 #include "../externals/include/GLFW/glfw3.h" // Will drag system OpenGL headers
 #include <vector>
 #include "constants.hpp"
+#include <bits/stdc++.h> 
 using namespace std;
 
 
@@ -31,6 +33,10 @@ class Snake {
 		void	Reset();
 		//Handles user's command line arguments
 		bool	setUserArgs(const int argc, char* argv[]);
+		//Sends user to Game Over scene
+		void	gameOver();
+		//Reads and write to save
+		void	saveBestScore();
 
 		ImDrawList		*dl;
 		ImGuiIO			*io;

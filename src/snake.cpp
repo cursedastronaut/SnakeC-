@@ -1,7 +1,12 @@
 #include "snake.h"
-using namespace std;
-int toInt(const char* index);
 
+using namespace std;
+
+//Splits a string into an array of substrings
+static void split(std::string in, char splitter, std::vector<std::string>* output);
+
+int toInt(const char* index);
+vector<uint32_t> getMultipleInt(string &);
 //Snake class constructor
 Snake::Snake() {
 	updateCap = UPDATE_CAP;
@@ -33,7 +38,7 @@ void Snake::Update() {
 
 		//Checks if snake head is beyond limit
 		if (!loopAtBorders && (tail[0].x < 0 || tail[0].x >= GRID_SIZE.x || tail[0].y < 0 || tail[0].y >= GRID_SIZE.y))
-			scene = SCENE_GAMEOVER;
+			gameOver();
 		else
 			borderLoop();
 
@@ -113,8 +118,9 @@ void Snake::DebugInfo() {
 	ImGui::Begin("Debug Informations");
 	ImGui::Text("PlaygroundSize: %d, %d", GRID_SIZE.x, GRID_SIZE.y);
 	ImGui::Text("Apple position: %f, %f", applePos.x, applePos.y);
+	ImGui::Text("Apple Eaten: %d", appleEaten);
 	for (size_t i = 0; i < tail.size(); ++i)
-		ImGui::Text("Snake%ld : %f, %f", i, tail[i].x, tail[i].y);
+		ImGui::Text("Snake%lld : %f, %f", i, tail[i].x, tail[i].y);
 	ImGui::End();
 }
 
@@ -202,4 +208,59 @@ int toInt(const char* index) {
 		result += (temp[i] - '0') * std::pow(10, temp.size()-1-i);
 	}
 	return result;
+}
+
+void Snake::gameOver() {
+	saveBestScore();
+	scene = SCENE_GAMEOVER;
+}
+
+void Snake::saveBestScore() {
+	fstream saveFile("save.bin", ios::in | ios::out | ios::app | ios::binary);
+	if (!saveFile.is_open())
+		return;
+	
+	string fileContent;
+	std::getline(saveFile, fileContent);
+	vector<uint32_t> scores = getMultipleInt(fileContent);
+	
+	if (scores.size() != 10)
+		return;
+
+	scores.push_back(appleEaten);
+	std::sort(scores.begin(), scores.end());
+
+	for ( size_t i = 0; i < scores.size() && i < 10; ++i )
+		saveFile << scores[10-i] << (i == 9 || i >= scores.size()-1 ? "" : ",");
+	saveFile.close();
+}
+
+vector<uint32_t> getMultipleInt(string &save) {
+	vector<string> numbers;
+	split(save, ',', &numbers);
+	
+	vector<uint32_t> output;
+
+	for (size_t i = 0; i < numbers.size(); ++i) {
+		output.push_back(toInt(numbers[i].c_str()));
+	}
+
+	return output;
+}
+
+void split(std::string in, char splitter, std::vector<std::string>* output)
+{
+	size_t startIndex = 0, endIndex = 0;
+	for (size_t i = 0; i <= in.size(); i++) {
+
+		// If we reached the end of the word or the end of the input.
+		if (in[i] == splitter || i == in.size()) {
+			endIndex = i;
+			std::string temp;
+			temp.append(in, startIndex, endIndex - startIndex);
+			output->push_back(temp);
+			startIndex = endIndex + 1;
+		}
+	}
+	return;
 }
