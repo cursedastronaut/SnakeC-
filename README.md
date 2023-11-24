@@ -23,49 +23,135 @@ make -j
 ```
 
 ## Folder tree
-/<br/>
-│   .gitignore<br/>
-│   Makefile<br/>
-│   README.md<br/>
-│<br/>
-├───externals<br/>
-│   ├───include<br/>
-│   │   ├───GLFW<br/>
-│   │   │       glfw3.h<br/>
-│   │   │       glfw3native.h<br/>
-│   │   │<br/>
-│   │   └───imgui<br/>
-│   │       │   imconfig.h<br/>
-│   │       │   imgui.cpp<br/>
-│   │       │   imgui.h<br/>
-│   │       │   imgui_demo.cpp<br/>
-│   │       │   imgui_draw.cpp<br/>
-│   │       │   imgui_internal.h<br/>
-│   │       │   imgui_tables.cpp<br/>
-│   │       │   imgui_widgets.cpp<br/>
-│   │       │   imstb_rectpack.h<br/>
-│   │       │   imstb_textedit.h<br/>
-│   │       │   imstb_truetype.h<br/>
-│   │       │   LICENSE.txt<br/>
-│   │       │<br/>
-│   │       └───backends<br/>
-│   │               imgui_impl_glfw.cpp<br/>
-│   │               imgui_impl_glfw.h<br/>
-│   │               imgui_impl_opengl3.cpp<br/>
-│   │               imgui_impl_opengl3.h<br/>
-│   │               imgui_impl_opengl3_loader.h<br/>
-│   │<br/>
-│   └───libs<br/>
-│       └───windows-mingw64-13.2.0<br/>
-│               libglfw3.a<br/>
-│<br/>
-├───objects<br/>
-│<br/>
-└───src<br/>
-        constants.hpp<br/>
-        main.cpp<br/>
-        snake.cpp<br/>
-        snake.h<br/>
+/
+
+
+│   .gitignore
+
+
+│   Makefile
+
+
+│   README.md
+
+
+│
+
+
+├───externals
+
+
+│   ├───include
+
+
+│   │   ├───GLFW
+
+
+│   │   │       glfw3.h
+
+
+│   │   │       glfw3native.h
+
+
+│   │   │
+
+
+│   │   └───imgui
+
+
+│   │       │   imconfig.h
+
+
+│   │       │   imgui.cpp
+
+
+│   │       │   imgui.h
+
+
+│   │       │   imgui_demo.cpp
+
+
+│   │       │   imgui_draw.cpp
+
+
+│   │       │   imgui_internal.h
+
+
+│   │       │   imgui_tables.cpp
+
+
+│   │       │   imgui_widgets.cpp
+
+
+│   │       │   imstb_rectpack.h
+
+
+│   │       │   imstb_textedit.h
+
+
+│   │       │   imstb_truetype.h
+
+
+│   │       │   LICENSE.txt
+
+
+│   │       │
+
+
+│   │       └───backends
+
+
+│   │               imgui_impl_glfw.cpp
+
+
+│   │               imgui_impl_glfw.h
+
+
+│   │               imgui_impl_opengl3.cpp
+
+
+│   │               imgui_impl_opengl3.h
+
+
+│   │               imgui_impl_opengl3_loader.h
+
+
+│   │
+
+
+│   └───libs
+
+
+│       └───windows-mingw64-13.2.0
+
+
+│               libglfw3.a
+
+
+│
+
+
+├───objects
+
+
+│
+
+
+└───src
+
+
+        constants.hpp
+        
+        
+        main.cpp
+        
+        
+        snake.cpp
+        
+        
+        snake.h
+        
+        
 
 ## Credits
 - [ImGui](https://github.com/ocornut/imgui)
