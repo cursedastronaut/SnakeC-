@@ -98,7 +98,9 @@ ImVec2 Snake::Movement(size_t i) {
 void Snake::Draw() {
 	for (size_t i = 0; i < tail.size(); ++i)
 		dl->AddRectFilled(tail[i]*CASE_SIZE, tail[i]*CASE_SIZE+CASE_SIZE, IM_COL32_WHITE);
-	dl->AddRectFilled(applePos*CASE_SIZE, applePos*CASE_SIZE+CASE_SIZE, IM_COL32_BLACK);
+	dl->AddRectFilled(applePos*CASE_SIZE, applePos*CASE_SIZE+CASE_SIZE, IM_COL32(255, 0, 0, 255));
+	//Draws score
+	dl->AddText({0,0}, IM_COL32_BLACK, string("Score: " + to_string(appleEaten)).c_str());
 }
 
 //Gets the user input to change to a direction
