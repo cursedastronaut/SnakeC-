@@ -215,24 +215,51 @@ void Snake::gameOver() {
 	scene = SCENE_GAMEOVER;
 }
 
+//Reads and save the score if it is part of the 10 best saved ones.
 void Snake::saveBestScore() {
-	fstream saveFile("save.bin", ios::in | ios::out | ios::app | ios::binary);
-	if (!saveFile.is_open())
-		return;
-	
-	string fileContent;
-	std::getline(saveFile, fileContent);
-	vector<uint32_t> scores = getMultipleInt(fileContent);
-	
-	if (scores.size() != 10)
-		return;
+	//Checks if save.bin exists
+	if (filesystem::is_regular_file("save.bin")) {
+		//Reading the file part
+		fstream saveFile("save.bin", ios::in | ios::out | ios::app | ios::binary);
+		if (!saveFile.is_open())
+			return;
+		
+		string fileContent;
+		std::getline(saveFile, fileContent);
+		vector<uint32_t> scores = getMultipleInt(fileContent);
+		
+		if (scores.size() != 10)
+			return;
 
-	scores.push_back(appleEaten);
-	std::sort(scores.begin(), scores.end());
+		scores.push_back(appleEaten);
+		std::sort(scores.begin(), scores.end());
 
-	for ( size_t i = 0; i < scores.size() && i < 10; ++i )
-		saveFile << scores[10-i] << (i == 9 || i >= scores.size()-1 ? "" : ",");
-	saveFile.close();
+		if (debugMode) {
+			for (size_t i = 0; i < scores.size(); ++i)
+				cout << scores[i] << ";";
+			cout << endl;
+		}
+
+		saveFile.close();
+
+		//Writing the save file part
+		fstream saveFileWrite("save.bin", ios::out | ios::binary | ios::trunc);
+		for ( size_t i = 0; i < scores.size() && i < 10; ++i ) {
+			cout << scores[10-i] << (i == 9 || i >= scores.size()-1 ? "" : ",");
+			saveFileWrite << scores[10-i] << (i == 9 || i >= scores.size()-1 ? "" : ",");
+		}
+
+		saveFileWrite.close();
+
+	} else {
+		fstream saveFile("save.bin", ios::out | ios::app | ios::binary);
+		if (!saveFile.is_open())
+			return;
+
+		saveFile << "0,0,0,0,0,0,0,0,0,0";
+		saveFile.close();
+		saveBestScore();
+	}
 }
 
 vector<uint32_t> getMultipleInt(string &save) {
