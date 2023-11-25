@@ -189,6 +189,19 @@ bool Snake::setUserArgs(const int argc, char* argv[]) {
 					<< "\t- `--y [height]`\n\t\tAllows player to choose their vertical grid size. Default is 30." << endl
 					<< "\t- `--skip`\n\t\tAllows player to skip the main menu." << endl;
 					return true;
+		} else if (strcmp(argv[i], "--speed") == 0) {
+			if (i >= argc - 1) {
+				cout	<< "Error: --speed argument is empty." << endl
+						<< "Syntax is --speed [x] (where the speed of the snake is 1/x)" << endl;
+				return true;
+			} else {
+				int temp = toInt(argv[i+1]);
+				if (temp == 0) {
+					cout << "Erreur: Invalid value at --speed" << endl;
+					return true;
+				}
+				updateCap = 1.f/(float)temp;
+			}
 		}
 	}
 	return false;
