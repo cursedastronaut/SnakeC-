@@ -118,11 +118,12 @@ void Snake::getDirection() {
 //Displays debug informations
 void Snake::DebugInfo() {
 	ImGui::Begin("Debug Informations");
+	ImGui::Text("FPS: %1.f", 1.f/io->DeltaTime);
 	ImGui::Text("PlaygroundSize: %d, %d", GRID_SIZE.x, GRID_SIZE.y);
-	ImGui::Text("Apple position: %f, %f", applePos.x, applePos.y);
+	ImGui::Text("Apple position: %1.f, %1.f", applePos.x, applePos.y);
 	ImGui::Text("Apple Eaten: %d", appleEaten);
 	for (size_t i = 0; i < tail.size(); ++i)
-		ImGui::Text("Snake%lld : %f, %f", i, tail[i].x, tail[i].y);
+		ImGui::Text("Snake%lld : %1.f, %1.f", i, tail[i].x, tail[i].y);
 	ImGui::End();
 }
 
