@@ -1,4 +1,7 @@
+#Objects files
 objects/
+#Externals docs, examples, things that aren't used in the
+#main program
 externals/imgui/.github
 externals/imgui/docs
 externals/imgui/examples
@@ -7,14 +10,18 @@ externals/imgui/.gitignore
 externals/imgui/.gitattributes
 externals/imgui/.editorconfig
 externals/imgui/backends/**
+#Externals exceptions (things we actually do need)
 !externals/imgui/backends/imgui_impl_glfw.cpp
 !externals/imgui/backends/imgui_impl_opengl3.cpp
 !externals/imgui/backends/imgui_impl_glfw.h
 !externals/imgui/backends/imgui_impl_opengl3.h
 !externals/imgui/backends/imgui_impl_opengl3_loader.h
+#Runtime files
 imgui.ini
 snake
+save.bin
 *.exe
+#Visual Studio Code folders and files
 .vscode/
 *.json
-save.bin
+*.code-workspace
